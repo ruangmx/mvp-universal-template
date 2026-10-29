@@ -1,0 +1,78 @@
+{
+  "block-secrets-read": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "read_file|view_file|grep_search|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "../scripts/hooks/block-secrets-read.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "block-secrets-commit": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "../scripts/hooks/block-secrets-commit.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "protect-branches": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "../scripts/hooks/protect-branches.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "dangerous-bash-guard": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "../scripts/hooks/dangerous-bash-guard.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "context-reminder": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "write_file|edit_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "../scripts/hooks/context-reminder.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
+
