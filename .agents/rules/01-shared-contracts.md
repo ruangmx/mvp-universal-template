@@ -1,7 +1,6 @@
 ---
 trigger: glob
-globs:
-  - "packages/shared/**"
+globs: "packages/shared/**"
 description: Regras de arquitetura para o pacote @mvp/shared (Schemas Zod, Domínio Puro e Erros).
 ---
 

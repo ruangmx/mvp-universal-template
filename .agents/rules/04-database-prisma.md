@@ -1,9 +1,6 @@
 ---
 trigger: glob
-globs:
-  - "apps/api/prisma/**"
-  - "apps/api/prisma.config.ts"
-  - "apps/api/src/common/prisma/**"
+globs: "apps/api/{prisma/**,prisma.config.ts,src/common/prisma/**}"
 description: Regras de banco de dados PostgreSQL e Prisma ORM (Schema, Migrations, Driver Adapter e Seeds).
 ---
 

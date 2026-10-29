@@ -1,7 +1,6 @@
 ---
 trigger: glob
-globs:
-  - "apps/web/**"
+globs: "apps/web/**"
 description: Regras de arquitetura Frontend para apps/web (Next.js App Router, Tailwind v4 e ViewModel Hooks).
 ---
 
