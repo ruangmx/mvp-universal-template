@@ -10,6 +10,13 @@ build/
 coverage/
 *.tsbuildinfo
 
+# Rede de segurança: artefatos compilados que já escaparam para dentro de src/
+# (ex.: `tsc` rodado sem respeitar outDir) nunca devem ser versionados.
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+
 # Variáveis de ambiente e segredos (NUNCA versionar)
 .env
 .env.*
