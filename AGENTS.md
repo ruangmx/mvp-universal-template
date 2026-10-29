@@ -10,8 +10,8 @@ Este projeto é um **Template Universal de MVP** em TypeScript estrito, dividido
 
 | Pacote | Caminho | Papel Arquitetural |
 | :--- | :--- | :--- |
-| **`@mvp/shared`** | `packages/shared/` | **Contrato Único:** Schemas Zod, DTOs, erros padronizados e regras de domínio puras (consumido via source `.ts` direto). |
-| **`@mvp/api`** | `apps/api/` | **Backend:** NestJS 11 + Drizzle ORM (PostgreSQL) + Swagger + Eventos SSE + Guards. |
+| **`@mvp/shared`** | `packages/shared/` | **Contrato Único:** Schemas Zod, DTOs, erros padronizados e regras de domínio puras (`dist/` para a API + `transpilePackages` na Web). |
+| **`@mvp/api`** | `apps/api/` | **Backend:** NestJS 11 + Prisma ORM (PostgreSQL via driver adapter) + Swagger + Eventos SSE + Guards. |
 | **`@mvp/web`** | `apps/web/` | **Frontend:** Next.js (App Router) + Tailwind CSS v4 + View-Model Hooks + cliente HTTP tipado. |
 
 ---
@@ -23,7 +23,7 @@ Este projeto é um **Template Universal de MVP** em TypeScript estrito, dividido
 - Mexendo em `packages/shared/**` 👉 Leia `.agents/rules/01-shared-contracts.md`
 - Mexendo em `apps/api/**` (exceto banco) 👉 Leia `.agents/rules/02-backend-nestjs.md`
 - Mexendo em `apps/web/**` 👉 Leia `.agents/rules/03-frontend-nextjs.md`
-- Mexendo em `apps/api/src/db/**` ou migrations 👉 Leia `.agents/rules/04-database-drizzle.md`
+- Mexendo em `apps/api/prisma/**` ou migrations 👉 Leia `.agents/rules/04-database-prisma.md`
 - Regras globais de segurança e tokens 👉 `.agents/rules/00-security-and-tokens.md`
 
 ---
@@ -38,7 +38,7 @@ pnpm test:e2e            # Roda testes de integração/E2E
 pnpm typecheck           # Checagem estrita de tipos TypeScript em todos os pacotes
 pnpm lint                # ESLint em todos os pacotes (--max-warnings=0)
 pnpm build               # Build de produção (shared, api e web)
-pnpm db:generate         # Gera migration SQL do Drizzle a partir do schema
+pnpm db:generate         # Gera migration SQL do Prisma a partir do schema (sem aplicar)
 pnpm db:migrate          # Aplica migrations no PostgreSQL
 pnpm db:seed             # Popula dados de teste idempotentes
 pnpm db:reset            # Recria banco de dev do zero e aplica seed

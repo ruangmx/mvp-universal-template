@@ -1,0 +1,53 @@
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Builds e outputs
+dist/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# Rede de segurança: artefatos compilados que já escaparam para dentro de src/
+# (ex.: `tsc` rodado sem respeitar outDir) nunca devem ser versionados.
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+
+# Variáveis de ambiente e segredos (NUNCA versionar)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account.json
+
+# Logs e diagnósticos
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Sistema Operacional e IDEs
+.DS_Store
+Thumbs.db
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Dados locais de banco Docker
+postgres_data/
+

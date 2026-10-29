@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+# .githooks/pre-commit
+# Trava nativa do Git (protege tanto humanos no terminal/IDE quanto agentes de IA)
+
+IS_ADMIN="$(git config --get project.admin 2>/dev/null || echo 'false')"
+BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+
+if [ "$IS_ADMIN" != "true" ]; then
+  if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ] || [ "$BRANCH" = "develop" ]; then
+    echo "❌ [Git Guard] Commit direto na branch protegida '$BRANCH' não é permitido."
+    echo "👉 Crie uma branch de trabalho: git checkout -b feature/<nome> (ou fix/<nome>)"
+    echo "   (Mantenedor: para liberar sua máquina local, rode 'git config project.admin true')"
+    exit 1
+  fi
+fi
+
+# Bloqueia arquivos de segredo no stage
+STAGED_FILES="$(git diff --cached --name-only)"
+for FILE in $STAGED_FILES; do
+  BASE="$(basename "$FILE")"
+  case "$BASE" in
+    .env.example|.env.sample|.env.template) ;;
+    .env|.env.*|*.pem|*.key|*.p12|*.pfx|credentials.json|service-account.json)
+      echo "❌ [Segurança] Commit bloqueado: arquivo sensível '$FILE' detectado no stage."
+      exit 1
+      ;;
+  esac
+done
+
+exit 0
+

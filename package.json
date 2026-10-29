@@ -1,0 +1,34 @@
+{
+  "name": "antigravity-template",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Universal Agentic MVP Template (Antigravity + Claude Code)",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @mvp/shared --filter @mvp/api --filter @mvp/web dev",
+    "dev:api": "pnpm --filter @mvp/api dev",
+    "dev:web": "pnpm --filter @mvp/web dev",
+    "postinstall": "git config core.hooksPath .githooks 2>/dev/null || true; pnpm --filter @mvp/shared build",
+    "build": "pnpm --filter @mvp/shared build && pnpm --filter @mvp/api build && pnpm --filter @mvp/web build",
+    "typecheck": "pnpm --filter @mvp/shared build && pnpm --recursive typecheck",
+    "lint": "pnpm --recursive lint",
+    "test": "pnpm --filter @mvp/shared build && vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "db:generate": "pnpm --filter @mvp/api db:generate",
+    "db:migrate": "pnpm --filter @mvp/api db:migrate",
+    "db:seed": "pnpm --filter @mvp/api db:seed",
+    "db:reset": "pnpm --filter @mvp/api db:reset",
+    "db:studio": "pnpm --filter @mvp/api db:studio",
+    "agents:sync": "node scripts/sync-agents.mjs"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@eslint/js": "9.39.5",
+    "@types/node": "^22.10.7",
+    "eslint": "9.39.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "^3.0.4"
+  }
+}
