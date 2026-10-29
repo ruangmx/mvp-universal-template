@@ -1,7 +1,6 @@
 ---
 trigger: glob
-globs:
-  - "apps/api/**"
+globs: "apps/api/**"
 description: Regras de arquitetura Backend para apps/api (NestJS 11, Camadas, Guards, Erros e SSE).
 ---
 
