@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# .githooks/commit-msg
+# Valida formato de commit semântico sem precisar instalar Husky/Commitlint
+
+COMMIT_MSG_FILE="$1"
+FIRST_LINE="$(head -n 1 "$COMMIT_MSG_FILE")"
+
+# Permite commits automáticos de Merge ou Revert do Git
+if echo "$FIRST_LINE" | grep -Eq '^(Merge |Revert )'; then
+  exit 0
+fi
+
+# Aceita "[tipo](escopo): Mensagem" (padrão oficial das skills) ou "tipo(escopo): Mensagem"
+if echo "$FIRST_LINE" | grep -Eq '^(\[(feat|fix|refactor|docs|test|chore|ci)\]\([a-zA-Z0-9_./-]+\)|(feat|fix|refactor|docs|test|chore|ci)(\([a-zA-Z0-9_./-]+\))?): .{3,}'; then
+  exit 0
+fi
+
+echo "❌ [Commit Guard] Mensagem fora do padrão: \"$FIRST_LINE\""
+echo "👉 Use o formato semântico: [tipo](escopo): Descrição clara"
+echo "   Tipos aceitos: feat | fix | refactor | docs | test | chore | ci"
+echo "   Exemplo: [feat](tasks): Adiciona filtro por prioridade"
+exit 1
+

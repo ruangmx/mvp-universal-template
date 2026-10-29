@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "postgres-local": {
+      "disabled": true,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://postgres:postgres@localhost:5432/mvp_dev"]
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Convenção de entidade do template: id UUID, created_at/updated_at (timestamptz)
+/// e deleted_at para soft delete. Todo módulo novo deve seguir este padrão.
+model Task {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String    @db.VarChar(100)
+  description String?
+  status      String    @default("PENDING") @db.VarChar(20)
+  priority    String    @default("MEDIUM") @db.VarChar(20)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([deletedAt])
+  @@map("tasks")
+}
